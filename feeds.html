@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feeds</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            min-height: 100vh;
+            background-color: #f4f4f4;
+        }
+
+        .sidebar {
+            width: 250px;
+            background: #fff;
+            padding: 2rem 0;
+            border-right: 1px solid #ddd;
+            height: 100vh;
+            position: fixed;
+            overflow-y: auto;
+        }
+
+        .sidebar h2 {
+            color: #0066cc;
+            padding: 0 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .nav-menu {
+            list-style: none;
+        }
+
+        .nav-menu a {
+            display: block;
+            padding: 0.75rem 1.5rem;
+            color: #333;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .nav-menu a:hover {
+            background: #e9ecef;
+        }
+
+        .nav-menu a.active {
+            color: #28a745;
+            background: #e9ecef;
+            font-weight: bold;
+        }
+
+        .content {
+            flex: 1;
+            margin-left: 250px;
+            padding: 2rem;
+            background: #fff;
+            min-height: 100vh;
+        }
+
+        #content-area {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: #fff;
+        }
+    </style>
+</head>
+<body>
+    <nav class="sidebar">
+        <h2>Feeds</h2>
+        <ul class="nav-menu">
+            <li><a href="#" class="active" data-page="feeds01">Effectiveness</a></li>
+            <li><a href="#" data-page="feeds02">Campaign Performance</a></li>
+            <li><a href="#" data-page="feeds03">Purchase Channel</a></li>
+            <li><a href="#" data-page="feeds06">Google Ad Campaign</a></li>
+            <li><a href="#" data-page="feeds07">Facebook Ad Campaign</a></li>
+            <li><a href="#" data-page="feeds08">Amazon Ad Campaign</a></li>
+            <li><a href="#" data-page="feeds09">Product Sale Performance</a></li>
+        </ul>
+    </nav>
+
+    <main class="content">
+        <div id="content-area">
+            <iframe id="content-frame" src="feeds01.html"></iframe>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const navLinks = document.querySelectorAll('.nav-menu a');
+            const contentFrame = document.getElementById('content-frame');
+
+            // 设置默认页面
+            contentFrame.src = 'feeds01.html';
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    
+                    // 移除所有链接的active类
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    
+                    // 添加active类到被点击的链接
+                    link.classList.add('active');
+                    
+                    // 加载对应页面
+                    const page = link.getAttribute('data-page');
+                    contentFrame.src = `${page}.html`;
+                });
+            });
+        });
+    </script>
+</body>
+</html> 

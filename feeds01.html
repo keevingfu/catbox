@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catbox Ad Creative & Targeting Effectiveness</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        h2, h3 {
+            color: #444;
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+        }
+
+        .section {
+            margin-bottom: 2em;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1em;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f0f0f0;
+        }
+
+        .chart-container {
+            width: 100%; /* Full width initially */
+            height: 300px;
+            margin-bottom: 20px;
+        }
+        /* Responsive adjustments */
+        @media (min-width: 768px) { /* For tablets and larger */
+            .chart-row {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+            }
+            .chart-container {
+                width: 48%; /* Two charts per row on larger screens */
+            }
+        }
+
+         .recommendations {
+           list-style-type: disc;
+           padding-left: 20px;
+        }
+        .recommendations li {
+            margin-bottom: 0.5em;
+        }
+        .ranking-cell {
+          text-align: center;
+        }
+        .ranking-below-average {
+            color: red;
+            font-weight: bold;
+        }
+
+        .ranking-average {
+            color: orange;
+            font-weight: bold;
+        }
+
+        .ranking-above-average {
+            color: green;
+            font-weight: bold;
+        }
+
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Catbox Ad Creative & Targeting Effectiveness</h1>
+
+    <div class="section">
+        <h2>Executive Summary</h2>
+        <p>
+            This dashboard analyzes the creative and targeting effectiveness of Catbox's "SE Testing R2 Ad set" Facebook Ad campaign (Feb 9-15, 2025).  The focus is on identifying strengths and weaknesses in ad creative and audience targeting.  Key findings indicate a critical need to improve ad creative quality across all variations, despite average engagement and conversion rankings.
+        </p>
+    </div>
+
+    <div class="section">
+        <h2>Key Performance Indicators (KPIs)</h2>
+         <div class="chart-row">
+            <div id="ctr-chart" class="chart-container"></div>
+            <div id="cpc-chart" class="chart-container"></div>
+        </div>
+         <div class="chart-row">
+             <div id="reach-impressions-chart" class="chart-container"></div>
+              <div id="quality-ranking-chart" class="chart-container"></div>
+         </div>
+
+
+        <table>
+            <thead>
+            <tr>
+                <th>Ad Name</th>
+                <th>Quality Ranking</th>
+                <th>Engagement Rate Ranking</th>
+                <th>Conversion Rate Ranking</th>
+                <th>CTR (all)</th>
+                <th>CPC (all)</th>
+                <th>Reach</th>
+                <th>Impressions</th>
+                 <th>Results</th>
+                <th>Cost per Result</th>
+                <th>Purchase ROAS</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>T1</td><td class="ranking-cell ranking-below-average">Below average (Bottom 35%)</td><td class="ranking-cell ranking-average">Average</td><td class="ranking-cell ranking-average">Average</td><td>1.96%</td><td>$1.04</td><td>1063</td><td>3066</td> <td>2</td><td>31.23</td><td>8.53</td>
+            </tr>
+            <tr>
+                <td>T2</td><td class="ranking-cell ranking-below-average">Below average (Bottom 35%)</td><td class="ranking-cell ranking-average">Average</td><td class="ranking-cell ranking-average">Average</td><td>1.79%</td><td>$1.31</td><td>446</td><td>1006</td><td>1</td><td>23.64</td><td>8.76</td>
+            </tr>
+            <tr>
+                <td>T3</td><td class="ranking-cell ranking-below-average">Below average (Bottom 35%)</td><td class="ranking-cell ranking-average">Average</td><td class="ranking-cell ranking-average">Average</td><td>1.89%</td><td>$1.01</td><td>569</td><td>1902</td> <td>1</td><td>36.52</td><td>12.57</td>
+            </tr>
+            <tr>
+                <td>T4</td><td class="ranking-cell ranking-below-average">Below average (Bottom 35%)</td><td class="ranking-cell ranking-average">Average</td><td class="ranking-cell ranking-average">Average</td><td>1.27%</td><td>$1.31</td><td>411</td><td>1022</td><td> 2</td><td>8.51</td><td>29.92</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>Key Findings and Analysis</h2>
+        <ul>
+            <li><strong>Universally Low Quality Rankings:</strong> All ads received a "Below average" Quality Ranking, a major concern indicating poor ad creative relevance.</li>
+            <li><strong>Average Engagement/Conversion Rankings:</strong> Targeting is potentially effective, but ads fail to fully capture attention and drive conversions efficiently.</li>
+             <li><strong>CTR Variability:</strong> T1 has the highest CTR (1.96%), while T4 has the lowest (1.27%).</li>
+            <li><strong>CPC Differences:</strong>  T2 and T4 have higher CPCs ($1.31) than the others, possibly due to the low Quality Ranking.</li>
+            <li><strong>Ad T4 Paradox:</strong> Lower CTR and higher CPC, *but* significantly better conversion rate, higher ROAS, and lower Cost per Result. This suggests better targeting and *much* better post-click experience for T4.</li>
+
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Recommendations</h2>
+          <ul class="recommendations">
+              <li><strong>Prioritize Ad Creative Overhaul:</strong> Address the low Quality Rankings with clear messaging, strong visuals, compelling CTAs, and extensive A/B testing.</li>
+            <li><strong>Investigate T4's Post-Click Experience:</strong> Analyze T4's landing page and checkout to replicate its high conversion rate.</li>
+            <li><strong>Refine Targeting (Potentially):</strong>  After creative improvements, explore more specific targeting.</li>
+            <li><strong>Consider Audience Size and Frequency:</strong> Monitor reach for T4, it is converting best, but reaching the least users.</li>
+         </ul>
+    </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+<script>
+// Data (ideally, this would come from an API)
+const adData = [
+    { name: 'T1', quality: 'Below average', engagement: 'Average', conversion: 'Average', ctr: 0.0196, cpc: 1.04, reach: 1063, impressions: 3066, results: 2, costPerResult: 31.23, roas: 8.53 },
+    { name: 'T2', quality: 'Below average', engagement: 'Average', conversion: 'Average', ctr: 0.0179, cpc: 1.31, reach: 446, impressions: 1006, results: 1, costPerResult: 23.64, roas: 8.76 },
+    { name: 'T3', quality: 'Below average', engagement: 'Average', conversion: 'Average', ctr: 0.0189, cpc: 1.01, reach: 569, impressions: 1902, results: 1, costPerResult: 36.52, roas: 12.57 },
+    { name: 'T4', quality: 'Below average', engagement: 'Average', conversion: 'Average', ctr: 0.0127, cpc: 1.31, reach: 411, impressions: 1022, results: 2, costPerResult: 8.51, roas: 29.92 }
+];
+
+// CTR Chart
+const ctrChart = echarts.init(document.getElementById('ctr-chart'));
+const ctrOption = {
+    title: { text: 'Click-Through Rate (CTR) by Ad' },
+    tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+    legend: {
+        bottom: 0,
+        data: ['CTR']
+    },
+    grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '15%',
+        containLabel: true
+    },
+    xAxis: { type: 'category', data: adData.map(item => item.name) },
+    yAxis: { type: 'value', axisLabel: {formatter: '{value} %'} },
+    series: [{
+        name: 'CTR',
+        data: adData.map(item => (item.ctr * 100).toFixed(2)),
+        type: 'bar',
+        label: { show: true, position: 'top', formatter: '{c}%' }
+    }]
+};
+ctrChart.setOption(ctrOption);
+
+// CPC Chart
+const cpcChart = echarts.init(document.getElementById('cpc-chart'));
+const cpcOption = {
+    title: { text: 'Cost Per Click (CPC) by Ad' },
+    tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+    legend: {
+        bottom: 0,
+        data: ['CPC']
+    },
+    grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '15%',
+        containLabel: true
+    },
+    xAxis: { type: 'category', data: adData.map(item => item.name) },
+    yAxis: { type: 'value', axisLabel: {formatter: '${value}'} },
+    series: [{
+        name: 'CPC',
+        data: adData.map(item => item.cpc),
+        type: 'bar',
+        label: { show: true, position: 'top', formatter: '${c}' }
+    }]
+};
+cpcChart.setOption(cpcOption);
+
+// Reach and Impressions Chart (Combined)
+const reachImpressionsChart = echarts.init(document.getElementById('reach-impressions-chart'));
+const reachImpressionsOption = {
+    title: { text: 'Reach and Impressions by Ad' },
+    tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+    legend: { 
+        data: ['Reach', 'Impressions'],
+        bottom: 0
+    },
+    grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '15%',
+        containLabel: true
+    },
+    xAxis: { type: 'category', data: adData.map(item => item.name) },
+    yAxis: { type: 'value' },
+    series: [
+        { name: 'Reach', data: adData.map(item => item.reach), type: 'bar', label: {show: true, position: 'top'}},
+        { name: 'Impressions', data: adData.map(item => item.impressions), type: 'bar', label: {show: true, position: 'top'}}
+    ]
+};
+reachImpressionsChart.setOption(reachImpressionsOption);
+
+// Quality Ranking Chart (Simple Bar Chart)
+const qualityRankingChart = echarts.init(document.getElementById('quality-ranking-chart'));
+
+// Prepare data for Quality Ranking chart
+const qualityData = adData.map(item => {
+  let value;
+  switch (item.quality) {
+    case 'Below average': value = 1; break;
+    case 'Average': value = 2; break;
+    case 'Above average': value = 3; break;
+    default: value = 0;
+  }
+  return {
+      name: item.name,
+      value: value,
+  };
+});
+const qualityRankingOption = {
+    title: { text: 'Quality Ranking by Ad' },
+    tooltip: {
+        trigger: 'item',
+        formatter: function(params) {
+           let adName = params.name;
+           let originalData = adData.find(item => item.name === adName);
+           return `${params.name} <br/> Quality: ${originalData.quality}`;
+        }
+    },
+    legend: {
+        bottom: 0,
+        data: ['Quality Ranking']
+    },
+    grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '15%',
+        containLabel: true
+    },
+    xAxis: {
+        type: 'category',
+        data: adData.map(item => item.name)
+    },
+    yAxis: {
+       type: 'value',
+       min: 0,
+       max: 3,
+       interval: 1,
+       axisLabel: {
+           formatter: function(value) {
+               switch (value) {
+                   case 1: return 'Below Avg';
+                   case 2: return 'Average';
+                   case 3: return 'Above Avg';
+                   default: return '';
+               }
+           }
+       }
+    },
+    series: [{
+        name: 'Quality Ranking',
+        data: qualityData,
+        type: 'bar',
+        label: {
+            show: true,
+            position: 'inside',
+            formatter: function(params) {
+                switch (params.value) {
+                    case 1: return 'Below Avg';
+                    case 2: return 'Average';
+                    case 3: return 'Above Avg';
+                    default: return '';
+                }
+            }
+        }
+    }]
+};
+qualityRankingChart.setOption(qualityRankingOption);
+
+// Resize charts on window resize
+window.addEventListener('resize', () => {
+    ctrChart.resize();
+    cpcChart.resize();
+    reachImpressionsChart.resize();
+    qualityRankingChart.resize();
+});
+
+</script>
+
+</body>
+</html>

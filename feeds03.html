@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catbox Audience Insights & Research Questions</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        h2, h3 {
+            color: #444;
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+        }
+        h3 {
+          margin-top: 1em;
+          margin-bottom: 0.25em;
+        }
+
+        .section {
+            margin-bottom: 2em;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1em;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f0f0f0;
+        }
+
+        .chart-container {
+            width: 100%; /* Full width initially */
+            height: 300px;
+            margin-bottom: 20px;
+        }
+        /* Responsive adjustments */
+        @media (min-width: 768px) { /* For tablets and larger */
+            .chart-row {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+            }
+            .chart-container {
+                width: 48%; /* Two charts per row on larger screens */
+            }
+        }
+
+        .recommendations, .research-questions {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+        .recommendations li, .research-questions li {
+            margin-bottom: 0.5em;
+        }
+        .research-questions li strong {
+          display: block; /* Make the question bold and a block element */
+          margin-bottom: 0.25em;
+        }
+
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Catbox Audience Insights & Research Questions</h1>
+
+    <div class="section">
+        <h2>Executive Summary</h2>
+        <p>
+            This dashboard presents audience insights and addresses specific research questions for the Catbox "SE Testing R2 Ad set" campaign (Feb 9-15, 2025).  Due to the single ad set, direct audience segmentation is limited.  The campaign drives website purchases, with Ad T4 showing superior performance.  Key research questions highlight the need for multiple ad sets to gain actionable audience data.
+        </p>
+    </div>
+
+    <div class="section">
+        <h2>Audience Insights (Summary)</h2>
+        <ul>
+            <li><strong>Website-Driven Conversions:</strong> All purchases occurred on the website.</li>
+            <li><strong>Single Ad Set Limitation:</strong>  Direct audience comparisons are not possible.</li>
+            <li><strong>Inferred Characteristics:</strong>  Likely cat owners, tech-savvy, seeking convenience, website shoppers.</li>
+        </ul>
+        <div class="chart-row">
+          <div id="purchase-breakdown-chart" class="chart-container"></div>
+          <div id="reach-chart" class="chart-container"></div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Specific Research Questions & Answers</h2>
+        <ul class="research-questions">
+            <li><strong>Q1: Which ad has the highest Purchase ROAS?</strong> Ad T4 (29.92).</li>
+            <li><strong>Q2: Which ad has the lowest Cost per Result?</strong> Ad T4 ($8.51).</li>
+            <li><strong>Q3: Is there a correlation between Quality Ranking and Cost per Result?</strong>  Likely, but all ads have the same "Below Average" ranking, so no direct correlation can be shown with this data.</li>
+             <li><strong>Q4: Which ad has the highest CTR?</strong>  Ad T1 (1.96%).</li>
+            <li><strong>Q5: Are any ads being limited by budget?</strong> T1 is most likely limited by budget.</li>
+            <li><strong>Q6: What is the average frequency for each ad? Risk of ad fatigue?</strong>
+                <ul>
+                    <li>T1: 2.88</li>
+                    <li>T2: 2.26</li>
+                    <li>T3: 3.34 (monitor)</li>
+                    <li>T4: 2.49</li>
+                </ul>
+            </li>
+            <li><strong>Q7: Does higher reach always correlate with more purchases?</strong> No. T4 has the lowest reach but ties for the most purchases.</li>
+            <li><strong>Q8: Correlation between amount spent and conversions?</strong>  Not a straightforward correlation. T4 has the lowest spend and high conversions.</li>
+             <li><strong>Q9: How did the edits indicated by 'Last Significant Edit' impact the ads' performance?</strong> Positive.</li>
+            <li><strong>Q10: Which purchase channel contributes most?</strong> Website purchases (100%).</li>
+            <li><strong>Q11: Which audience segment is most responsive?</strong> Cannot be answered definitively without multiple ad sets. <em>This requires implementing multiple ad sets with varied targeting.</em></li>
+            <li><strong>Q12: Demographics, interests, and behaviors of converting users?</strong> Cannot be answered directly from this data. <em>Requires website analytics and/or multiple ad sets.</em></li>
+            <li><strong>Q13: Performance differences by device type?</strong> Data not available in this report. <em>Requires Facebook Ads Manager or website analytics.</em></li>
+            <li><strong>Q14: What times and which day performs the best?</strong> Data not available in this report. <em>Requires Facebook Ads Manager.</em></li>
+
+        </ul>
+    </div>
+      <div class="section">
+        <h2>Recommendations</h2>
+        <ul class="recommendations">
+            <li><strong>Implement Multiple Ad Sets:</strong> Create distinct ad sets for audience segmentation.</li>
+            <li><strong>Prioritize Ad Creative Improvement:</strong> Address low Quality Rankings.</li>
+            <li><strong>Analyze Website Analytics:</strong> Use Google Analytics for deeper insights.</li>
+            <li><strong>Monitor Key Metrics:</strong> Track ROAS, Cost per Result, CTR, frequency.</li>
+            <li><strong>Optimize Ad T4:</strong> Continue allocating budget, but increase gradually.</li>
+            <li><strong>Investigate T4's Post-Click Experience:</strong> Replicate its success factors.</li>
+            <li><strong>Track All Purchase Channels:</strong> Ensure complete tracking if applicable.</li>
+            <li><strong>Run customer surveys (Optional).</strong></li>
+        </ul>
+    </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+<script>
+// Data (ideally, this would come from an API)
+    const adData = [
+        { name: 'T1', adSet: 'SE Testing R2 Ad set', results: 2, costPerResult: 31.23, roas: 8.53, reach: 1063, purchases: 2, inAppPurchases: 0, websitePurchases: 2, offlinePurchases: 0, metaPurchases: 0 },
+        { name: 'T2', adSet: 'SE Testing R2 Ad set', results: 1, costPerResult: 23.64, roas: 8.76, reach: 446, purchases: 1, inAppPurchases: 0, websitePurchases: 1, offlinePurchases: 0, metaPurchases: 0 },
+        { name: 'T3', adSet: 'SE Testing R2 Ad set', results: 1, costPerResult: 36.52, roas: 12.57, reach: 569, purchases: 1, inAppPurchases: 0, websitePurchases: 1, offlinePurchases: 0, metaPurchases: 0 },
+        { name: 'T4', adSet: 'SE Testing R2 Ad set', results: 2, costPerResult: 8.51, roas: 29.92, reach: 411, purchases: 2, inAppPurchases: 0, websitePurchases: 2, offlinePurchases: 0, metaPurchases: 0 }
+    ];
+
+    // Purchase Breakdown Chart (Pie Chart)
+    const purchaseBreakdownChart = echarts.init(document.getElementById('purchase-breakdown-chart'));
+    const purchaseBreakdownOption = {
+        title: { text: 'Purchase Channel Breakdown (Overall)', left: 'center' },
+        tooltip: { trigger: 'item', formatter: '{a} <br/>{b} : {c} ({d}%)' },
+        legend: {
+            orient: 'horizontal',
+            bottom: 0,
+            data: ['Website Purchases', 'In-app Purchases', 'Offline Purchases', 'Meta Purchases']
+        },
+        series: [{
+            name: 'Purchase Channel',
+            type: 'pie',
+            radius: '55%',
+            center: ['50%', '60%'],
+            data: [
+                { value: adData.reduce((sum, item) => sum + item.websitePurchases, 0), name: 'Website Purchases' },
+                { value: adData.reduce((sum, item) => sum + item.inAppPurchases, 0), name: 'In-app Purchases' },
+                { value: adData.reduce((sum, item) => sum + item.offlinePurchases, 0), name: 'Offline Purchases' },
+                { value: adData.reduce((sum, item) => sum + item.metaPurchases, 0), name: 'Meta Purchases' }
+            ],
+            emphasis: {
+                itemStyle: {
+                    shadowBlur: 10,
+                    shadowOffsetX: 0,
+                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+                }
+            }
+        }]
+    };
+    purchaseBreakdownChart.setOption(purchaseBreakdownOption);
+
+ // Reach Chart (Bar Chart)
+    const reachChart = echarts.init(document.getElementById('reach-chart'));
+    const reachOption = {
+        title: { text: 'Reach by Ad', left: 'center' },
+        tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+        legend: {
+            data: ['Reach'],
+            bottom: 0
+        },
+        xAxis: { type: 'category', data: adData.map(item => item.name) },
+        yAxis: { type: 'value' },
+        series: [{
+            name: 'Reach',
+            data: adData.map(item => item.reach),
+            type: 'bar',
+            label: { show: true, position: 'top' }
+        }]
+    };
+    reachChart.setOption(reachOption);
+
+
+// Resize charts on window resize
+window.addEventListener('resize', () => {
+    purchaseBreakdownChart.resize();
+      reachChart.resize();
+});
+
+</script>
+
+</body>
+</html>

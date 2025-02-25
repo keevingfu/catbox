@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catbox Campaign Performance</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        h2, h3 {
+            color: #444;
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+        }
+
+        .section {
+            margin-bottom: 2em;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1em;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f0f0f0;
+        }
+
+        .chart-container {
+            width: 100%; /* Full width initially */
+            height: 300px;
+            margin-bottom: 20px;
+        }
+        /* Responsive adjustments */
+        @media (min-width: 768px) { /* For tablets and larger */
+            .chart-row {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+            }
+            .chart-container {
+                width: 48%; /* Two charts per row on larger screens */
+            }
+        }
+        .recommendations {
+           list-style-type: disc;
+           padding-left: 20px;
+        }
+        .recommendations li {
+            margin-bottom: 0.5em;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Catbox Overall Campaign Performance & Optimization</h1>
+
+    <div class="section">
+        <h2>Executive Summary</h2>
+        <p>
+            This dashboard provides an overview of the Facebook Ad campaign performance for Catbox's "SE Testing R2 Ad set"
+            during the period of February 9-15, 2025. The campaign's primary objective is to drive offsite purchases
+            tracked via the Facebook pixel.  Ad T4 demonstrates superior efficiency.  However, quality rankings are low,
+            presenting a key area for improvement.
+        </p>
+    </div>
+
+    <div class="section">
+      <h2>Key Performance Indicators (KPIs)</h2>
+      <div class="chart-row">
+          <div id="roas-chart" class="chart-container"></div>
+          <div id="cpr-chart" class="chart-container"></div>
+      </div>
+      <div class="chart-row">
+            <div id="ctr-cpc-chart" class="chart-container"></div>
+            <div id="freq-chart" class="chart-container"></div>
+      </div>
+        <table>
+            <thead>
+            <tr>
+                <th>Ad Name</th>
+                <th>Results</th>
+                <th>Cost per Result</th>
+                <th>Purchase ROAS</th>
+                <th>Amount Spent (USD)</th>
+                <th>Reach</th>
+                <th>Impressions</th>
+                <th>Frequency</th>
+                <th>CPC (all)</th>
+                <th>CTR (all)</th>
+                <th>Quality Ranking</th>
+                <th>Engagement Rate Ranking</th>
+                <th>Conversion Rate Ranking</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>T1</td><td>2</td><td>31.23</td><td>8.53</td><td>62.45</td><td>1063</td><td>3066</td><td>2.88</td><td>1.04</td><td>1.96%</td><td>Below average (Bottom 35%)</td><td>Average</td><td>Average</td>
+            </tr>
+            <tr>
+                <td>T2</td><td>1</td><td>23.64</td><td>8.76</td><td>23.64</td><td>446</td><td>1006</td><td>2.26</td><td>1.31</td><td>1.79%</td><td>Below average (Bottom 35%)</td><td>Average</td><td>Average</td>
+            </tr>
+            <tr>
+                <td>T3</td><td>1</td><td>36.52</td><td>12.57</td><td>36.52</td><td>569</td><td>1902</td><td>3.34</td><td>1.01</td><td>1.89%</td><td>Below average (Bottom 35%)</td><td>Average</td><td>Average</td>
+            </tr>
+            <tr>
+                <td>T4</td><td>2</td><td>8.51</td><td>29.92</td><td>17.01</td><td>411</td><td>1022</td><td>2.49</td><td>1.31</td><td>1.27%</td><td>Below average (Bottom 35%)</td><td>Average</td><td>Average</td>
+            </tr>
+
+            </tbody>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>Key Findings and Analysis</h2>
+        <ul>
+            <li><strong>T4 is the Most Efficient Ad:</strong> Ad T4 significantly outperforms the others in ROAS (29.92) and Cost per Result ($8.51).</li>
+            <li><strong>ROAS Variability:</strong> Significant differences in ROAS across ads suggest creative/targeting effectiveness disparities.</li>
+            <li><strong>Low Quality Rankings:</strong> All ads have "Below average" Quality Rankings, indicating a crucial improvement area.</li>
+            <li><strong>Moderate CTR and CPC:</strong>  Values are reasonable, but low conversion rates suggest post-click issues.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Recommendations</h2>
+        <ul class="recommendations">
+          <li><strong>Prioritize Ad T4:</strong> Allocate more budget to Ad T4.</li>
+          <li><strong>Investigate and Improve Ad Quality:</strong>  This is critical.  Focus on stronger headlines, ad copy, high-quality visuals, and A/B testing.</li>
+          <li><strong>Review Landing Page Experience:</strong> Ensure consistency with the ad and optimize for conversions.</li>
+          <li><strong>Monitor Frequency:</strong> Watch for ad fatigue, especially for T3 and T4.</li>
+          <li><strong>Gradually Increase Budget for T4:</strong>  Increase budget cautiously while monitoring performance.</li>
+        </ul>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+<script>
+
+// Data from the table (ideally, this would come from an API)
+const adData = [
+    { name: 'T1', results: 2, costPerResult: 31.23, roas: 8.53, amountSpent: 62.45, reach: 1063, impressions: 3066, frequency: 2.88, cpc: 1.04, ctr: 0.0196 },
+    { name: 'T2', results: 1, costPerResult: 23.64, roas: 8.76, amountSpent: 23.64, reach: 446, impressions: 1006, frequency: 2.26, cpc: 1.31, ctr: 0.0179 },
+    { name: 'T3', results: 1, costPerResult: 36.52, roas: 12.57, amountSpent: 36.52, reach: 569, impressions: 1902, frequency: 3.34, cpc: 1.01, ctr: 0.0189 },
+    { name: 'T4', results: 2, costPerResult: 8.51, roas: 29.92, amountSpent: 17.01, reach: 411, impressions: 1022, frequency: 2.49, cpc: 1.31, ctr: 0.0127 }
+];
+
+// ROAS Chart
+const roasChart = echarts.init(document.getElementById('roas-chart'));
+const roasOption = {
+    title: { text: 'Purchase ROAS by Ad' },
+    tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+    legend: {
+        data: ['ROAS'],
+        bottom: 0
+    },
+    grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '15%',
+        containLabel: true
+    },
+    xAxis: { type: 'category', data: adData.map(item => item.name) },
+    yAxis: { type: 'value' },
+    series: [{
+        name: 'ROAS',
+        data: adData.map(item => item.roas),
+        type: 'bar',
+        label: { show: true, position: 'top' }
+    }]
+};
+roasChart.setOption(roasOption);
+
+// Cost Per Result Chart
+const cprChart = echarts.init(document.getElementById('cpr-chart'));
+const cprOption = {
+    title: { text: 'Cost Per Result by Ad' },
+    tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+    legend: {
+        data: ['Cost Per Result'],
+        bottom: 0
+    },
+    grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '15%',
+        containLabel: true
+    },
+    xAxis: { type: 'category', data: adData.map(item => item.name) },
+    yAxis: { type: 'value' },
+    series: [{
+        name: 'Cost Per Result',
+        data: adData.map(item => item.costPerResult),
+        type: 'bar',
+        label: { show: true, position: 'top', formatter: '${c}' }
+    }]
+};
+cprChart.setOption(cprOption);
+
+// CTR and CPC Chart (Combined)
+const ctrCpcChart = echarts.init(document.getElementById('ctr-cpc-chart'));
+const ctrCpcOption = {
+    title: { text: 'CTR and CPC by Ad' },
+    tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+    legend: {
+        data: ['CTR', 'CPC'],
+        bottom: 0
+    },
+    grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '15%',
+        containLabel: true
+    },
+    xAxis: { type: 'category', data: adData.map(item => item.name) },
+    yAxis: [
+        { type: 'value', name: 'CTR', axisLabel: { formatter: '{value} %' } },
+        { type: 'value', name: 'CPC', axisLabel: { formatter: '${value}' } }
+    ],
+    series: [
+        {
+            name: 'CTR',
+            data: adData.map(item => (item.ctr * 100).toFixed(2)),
+            type: 'bar',
+            label: { show: true, position: 'top', formatter: '{c}%' },
+            yAxisIndex: 0
+        },
+        {
+            name: 'CPC',
+            data: adData.map(item => item.cpc),
+            type: 'line',
+            yAxisIndex: 1,
+            label: { show: true, position: 'top', formatter: '${c}' }
+        }
+    ]
+};
+ctrCpcChart.setOption(ctrCpcOption);
+
+// Frequency Chart
+const freqChart = echarts.init(document.getElementById('freq-chart'));
+const freqOption = {
+    title: { text: 'Frequency by Ad' },
+    tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+    legend: {
+        data: ['Frequency'],
+        bottom: 0
+    },
+    grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '15%',
+        containLabel: true
+    },
+    xAxis: { type: 'category', data: adData.map(item => item.name) },
+    yAxis: { type: 'value' },
+    series: [{
+        name: 'Frequency',
+        data: adData.map(item => item.frequency),
+        type: 'bar',
+        label: { show: true, position: 'top' }
+    }]
+};
+freqChart.setOption(freqOption);
+
+// Resize charts on window resize
+window.addEventListener('resize', () => {
+    roasChart.resize();
+    cprChart.resize();
+    ctrCpcChart.resize();
+    freqChart.resize();
+});
+
+</script>
+
+</body>
+</html>

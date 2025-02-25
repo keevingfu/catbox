@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Analytics Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-orange: #FF6B34;
+            --primary-blue: #82AAFF;
+            --primary-green: #C3E88D;
+            --primary-yellow: #FFB86C;
+            --bg-gray: #f4f4f4;
+            --text-dark: #333;
+            --card-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: var(--bg-gray);
+            color: var(--text-dark);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            margin: 0 0 10px 0;
+        }
+
+        .header p {
+            color: #666;
+            margin: 0;
+        }
+
+        .tabs {
+            display: flex;
+            background: white;
+            border-radius: 8px;
+            padding: 8px;
+            margin-bottom: 30px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .tab {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            border: none;
+            background: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .tab.active {
+            background-color: #f0f0f0;
+        }
+
+        .tab i {
+            font-size: 18px;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 24px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 8px;
+            padding: 24px;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 24px;
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin: 0 0 20px 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .chart-container {
+            height: 400px;
+        }
+
+        .metrics-grid {
+            display: grid;
+            gap: 16px;
+        }
+
+        .metric-card {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px;
+            border-radius: 8px;
+        }
+
+        .metric-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .metric-value {
+            font-weight: 600;
+        }
+
+        /* Metric card colors */
+        .metric-views { background-color: #FFF3E0; }
+        .metric-engagement { background-color: #E3F2FD; }
+        .metric-shares { background-color: #E8F5E9; }
+
+        .activity-list {
+            display: grid;
+            gap: 12px;
+        }
+
+        .activity-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            background: #f8f8f8;
+            border-radius: 8px;
+        }
+
+        .activity-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--primary-orange);
+            border-radius: 50%;
+        }
+
+        .activity-content {
+            flex: 1;
+        }
+
+        .activity-time {
+            font-size: 12px;
+            color: #666;
+        }
+
+        /* Video Formats Tab Styles */
+        .formats-container {
+            display: none;
+            gap: 32px;
+        }
+        
+        .formats-container.active {
+            display: flex;
+        }
+
+        .format-list {
+            flex: 1;
+            background: white;
+            border-radius: 8px;
+            padding: 24px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .semi-circle-progress {
+            width: 200px;
+            height: 100px;
+            margin: 0 auto 32px;
+            position: relative;
+        }
+
+        .format-item {
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .format-item:hover {
+            background-color: rgba(255, 107, 52, 0.1);
+        }
+
+        .format-name {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .format-color-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        .format-stats {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            color: #666;
+        }
+
+        .video-grid {
+            flex: 1;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        .video-card {
+            background: #f8f8f8;
+            border-radius: 8px;
+            padding: 16px;
+        }
+
+        .video-preview {
+            background: #e0e0e0;
+            height: 200px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+        }
+
+        .video-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .video-tag {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .video-stats {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .stat-group {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* Pain Points Tab Styles */
+        .pain-points-container {
+            display: none;
+            gap: 32px;
+        }
+        
+        .pain-points-container.active {
+            display: flex;
+        }
+
+        .pain-point-item {
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .pain-point-item:first-child {
+            background-color: rgba(255, 107, 52, 0.1);
+        }
+
+        .pain-point-item:hover:not(:first-child) {
+            background-color: rgba(0, 0, 0, 0.03);
+        }
+
+        .pain-point-name {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex: 1;
+        }
+
+        .pain-point-stats {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-left: 16px;
+            flex-shrink: 0;
+        }
+
+        .video-title {
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .tag-container {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .tag {
+            padding: 4px 12px;
+            background: white;
+            border-radius: 16px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .total-stats {
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            color: #666;
+            font-size: 14px;
+        }
+
+        /* Trending Creators Tab Styles */
+        .trending-container {
+            display: none;
+            flex-direction: column;
+            gap: 32px;
+        }
+        
+        .trending-container.active {
+            display: flex;
+        }
+
+        .creators-table {
+            width: 100%;
+            background: white;
+            border-radius: 8px;
+            box-shadow: var(--card-shadow);
+            overflow: hidden;
+        }
+
+        .creators-table tr {
+            border-bottom: 1px solid #eee;
+        }
+
+        .creators-table tr:last-child {
+            border-bottom: none;
+        }
+
+        .creators-table tr:hover {
+            background-color: #f8f8f8;
+        }
+
+        .creator-info {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px;
+        }
+
+        .creator-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #eee;
+        }
+
+        .creator-username {
+            color: var(--primary-orange);
+        }
+
+        .video-library {
+            margin-top: 32px;
+        }
+
+        .library-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .video-grid-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Video Analytics Dashboard</h1>
+            <p>Comprehensive analysis of your video content performance</p>
+        </div>
+
+        <div class="tabs">
+            <button class="tab active" data-tab="selling-points">
+                <i class="fas fa-fire"></i>
+                <span>Selling Points</span>
+            </button>
+            <button class="tab" data-tab="video-formats">
+                <i class="fas fa-video"></i>
+                <span>Video Formats</span>
+            </button>
+            <button class="tab" data-tab="pain-points">
+                <i class="fas fa-heart-broken"></i>
+                <span>Pain Points</span>
+            </button>
+            <button class="tab" data-tab="trending">
+                <i class="fas fa-users"></i>
+                <span>Trending Creators</span>
+            </button>
+        </div>
+
+        <!-- Video Formats Tab Content -->
+        <div class="formats-container" id="videoFormatsTab">
+            <div class="format-list">
+                <div class="semi-circle-progress">
+                    <div id="progressChart"></div>
+                    <div class="progress-text">
+                        <div class="text-2xl font-bold">11/30</div>
+                        <div class="text-orange-500">37%</div>
+                        <div class="text-gray-500">videos</div>
+                    </div>
+                </div>
+                <div id="formatsList"></div>
+            </div>
+            <div class="video-grid" id="videoGrid"></div>
+        </div>
+
+        <!-- Pain Points Tab Content -->
+        <div class="pain-points-container" id="painPointsTab">
+            <div class="format-list">
+                <div class="semi-circle-progress">
+                    <div id="painPointsProgress"></div>
+                    <div class="progress-text">
+                        <div class="text-2xl font-bold">10/41</div>
+                        <div class="text-orange-500">24%</div>
+                        <div class="text-gray-500">videos</div>
+                    </div>
+                </div>
+                <div id="painPointsList"></div>
+            </div>
+            <div class="video-grid" id="painPointsVideoGrid"></div>
+        </div>
+
+        <!-- Trending Creators Tab Content -->
+        <div class="trending-container" id="trendingTab">
+            <table class="creators-table">
+                <tbody id="creatorsList"></tbody>
+            </table>
+            
+            <div class="video-library">
+                <div class="library-header">
+                    <h2 class="text-xl font-semibold">Video Library</h2>
+                    <div class="flex items-center gap-2">
+                        <span class="text-gray-500">Order by</span>
+                        <select class="px-4 py-2 border rounded-lg">
+                            <option value="most-viewed">Most Viewed</option>
+                            <option value="newest">Newest</option>
+                            <option value="oldest">Oldest</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="video-grid-4" id="trendingVideoGrid"></div>
+            </div>
+        </div>
+
+        <div class="dashboard-grid" id="mainDashboard">
+            <div class="main-content">
+                <div class="card">
+                    <h2 class="card-title">
+                        <i class="fas fa-chart-line"></i>
+                        Performance Overview
+                    </h2>
+                    <div id="performanceChart" class="chart-container"></div>
+                </div>
+
+                <div class="card">
+                    <h2 class="card-title">Content Distribution</h2>
+                    <div id="distributionChart" class="chart-container"></div>
+                </div>
+            </div>
+
+            <div class="sidebar">
+                <div class="card">
+                    <h2 class="card-title">Key Metrics</h2>
+                    <div class="metrics-grid">
+                        <div class="metric-card metric-views">
+                            <div class="metric-info">
+                                <i class="fas fa-eye"></i>
+                                <span>Total Views</span>
+                            </div>
+                            <span class="metric-value">1.2M</span>
+                        </div>
+                        <div class="metric-card metric-engagement">
+                            <div class="metric-info">
+                                <i class="fas fa-heart"></i>
+                                <span>Engagement</span>
+                            </div>
+                            <span class="metric-value">85.4K</span>
+                        </div>
+                        <div class="metric-card metric-shares">
+                            <div class="metric-info">
+                                <i class="fas fa-share"></i>
+                                <span>Shares</span>
+                            </div>
+                            <span class="metric-value">12.3K</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2 class="card-title">Recent Activity</h2>
+                    <div class="activity-list">
+                        <div class="activity-item">
+                            <div class="activity-dot"></div>
+                            <div class="activity-content">
+                                <div>New video published</div>
+                                <div class="activity-time">2 hours ago</div>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-dot"></div>
+                            <div class="activity-content">
+                                <div>Reached 1M views</div>
+                                <div class="activity-time">5 hours ago</div>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-dot"></div>
+                            <div class="activity-content">
+                                <div>New subscriber milestone</div>
+                                <div class="activity-time">1 day ago</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Video Formats Data
+        const videoFormats = [
+            { name: 'Pet Experience Showcase', percentage: 37, count: 11, color: '#ff6b34' },
+            { name: 'Interactive Call-to-Action', percentage: 20, count: 6, color: '#ffd700' },
+            { name: 'Product Discovery Highlight', percentage: 13, count: 4, color: '#90EE90' },
+            { name: 'Creative POV Hook', percentage: 10, count: 3, color: '#32CD32' },
+            { name: 'Ease-of-Use Demonstration', percentage: 7, count: 2, color: '#00CED1' },
+            { name: 'Personal Testimonial', percentage: 7, count: 2, color: '#1E90FF' },
+            { name: "Do's and Don'ts Tutorial", percentage: 3, count: 1, color: '#4169E1' },
+            { name: 'Daily Life Integration', percentage: 3, count: 1, color: '#8A2BE2' }
+        ];
+
+        // Pain Points Data
+        const painPoints = [
+            { name: 'Pet owners facing inefficiency in managing cat litter', percentage: 24, count: 10, color: '#ff6b34' },
+            { name: 'Challenges in maintaining a clean environment for pets', percentage: 22, count: 9, color: '#ffd700' },
+            { name: 'Traditional litter boxes fail to maintain cleanliness and hygiene', percentage: 10, count: 4, color: '#90EE90' },
+            { name: 'Frequent need to monitor and clean litter boxes manually', percentage: 10, count: 4, color: '#32CD32' },
+            { name: 'Litter boxes that are not aesthetically integrated into homes', percentage: 10, count: 4, color: '#00CED1' },
+            { name: 'Manual cleaning of litter boxes is time-consuming and messy', percentage: 7, count: 3, color: '#1E90FF' }
+        ];
+
+        const painPointVideos = [
+            {
+                title: 'Get a catbox litter box for your feline...',
+                tags: ['catbox', 'catproducts'],
+                views: '1.1K',
+                likes: 8,
+                date: 'Feb 7, 2025',
+                author: '@philcone7198'
+            },
+            {
+                title: 'I found my new item for my cat! Catbox...',
+                tags: ['catbox', 'catproducts'],
+                views: '411',
+                likes: 5,
+                date: 'Jan 28, 2025',
+                author: '@philcone7198'
+            }
+        ];
+
+        // Trending Creators Data
+        const creators = [
+            { 
+                username: 'novemberjane26',
+                videoCount: 5,
+                views: '1.5K',
+                interactions: '--'
+            },
+            {
+                username: 'philcone7198',
+                videoCount: 4,
+                views: '4.6K',
+                interactions: '2'
+            },
+            {
+                username: 'cordellkauf',
+                videoCount: 2,
+                views: '2.3K',
+                interactions: '--'
+            },
+            {
+                username: 'fourgatitos',
+                videoCount: 1,
+                views: '518K',
+                interactions: '6.1K'
+            },
+            {
+                username: 'crochetcopia',
+                videoCount: 1,
+                views: '279K',
+                interactions: '9.9K'
+            }
+        ];
+
+        const trendingVideos = [
+            {
+                title: 'Ranqueando piores e melhor...',
+                author: '@fourgatitos',
+                date: 'Feb 12, 2025',
+                views: '518K',
+                likes: '38K',
+                shares: '6.1K'
+            },
+            // ... add other videos data
+        ];
+
+        // Tab Switching Logic
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                
+                const tabId = tab.dataset.tab;
+                document.getElementById('mainDashboard').style.display = 'none';
+                document.getElementById('videoFormatsTab').classList.remove('active');
+                document.getElementById('painPointsTab').classList.remove('active');
+                document.getElementById('trendingTab').classList.remove('active');
+
+                if (tabId === 'video-formats') {
+                    document.getElementById('videoFormatsTab').classList.add('active');
+                } else if (tabId === 'pain-points') {
+                    document.getElementById('painPointsTab').classList.add('active');
+                } else if (tabId === 'trending') {
+                    document.getElementById('trendingTab').classList.add('active');
+                } else {
+                    document.getElementById('mainDashboard').style.display = 'grid';
+                }
+            });
+        });
+
+        // Initialize Video Formats
+        function initVideoFormats() {
+            // Progress Chart
+            const progressChart = echarts.init(document.getElementById('progressChart'));
+            progressChart.setOption({
+                series: [{
+                    type: 'gauge',
+                    startAngle: 180,
+                    endAngle: 0,
+                    min: 0,
+                    max: 100,
+                    progress: {
+                        show: true,
+                        width: 18
+                    },
+                    pointer: {
+                        show: false
+                    },
+                    axisLine: {
+                        lineStyle: {
+                            width: 18
+                        }
+                    },
+                    axisTick: {
+                        show: false
+                    },
+                    splitLine: {
+                        show: false
+                    },
+                    axisLabel: {
+                        show: false
+                    },
+                    detail: {
+                        show: false
+                    },
+                    data: [{
+                        value: 37,
+                        itemStyle: {
+                            color: '#FF6B34'
+                        }
+                    }]
+                }]
+            });
+
+            // Render Format List
+            const formatsList = document.getElementById('formatsList');
+            formatsList.innerHTML = videoFormats.map(format => `
+                <div class="format-item">
+                    <div class="format-name">
+                        <span class="format-color-dot" style="background-color: ${format.color}"></span>
+                        <span>${format.name}</span>
+                    </div>
+                    <div class="format-stats">
+                        <span>${format.percentage}%</span>
+                        <span><i class="fas fa-video"></i> ${format.count}</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Initialize Pain Points
+        function initPainPoints() {
+            // Progress Chart
+            const progressChart = echarts.init(document.getElementById('painPointsProgress'));
+            progressChart.setOption({
+                series: [{
+                    type: 'gauge',
+                    startAngle: 180,
+                    endAngle: 0,
+                    min: 0,
+                    max: 100,
+                    progress: {
+                        show: true,
+                        width: 18
+                    },
+                    pointer: { show: false },
+                    axisLine: { lineStyle: { width: 18 } },
+                    axisTick: { show: false },
+                    splitLine: { show: false },
+                    axisLabel: { show: false },
+                    detail: { show: false },
+                    data: [{
+                        value: 24,
+                        itemStyle: { color: '#FF6B34' }
+                    }]
+                }]
+            });
+
+            // Render Pain Points List
+            const painPointsList = document.getElementById('painPointsList');
+            painPointsList.innerHTML = painPoints.map(point => `
+                <div class="pain-point-item">
+                    <div class="pain-point-name">
+                        <span class="format-color-dot" style="background-color: ${point.color}"></span>
+                        <span>${point.name}</span>
+                    </div>
+                    <div class="pain-point-stats">
+                        <span>${point.percentage}%</span>
+                        <span><i class="fas fa-video"></i> ${point.count}</span>
+                    </div>
+                </div>
+            `).join('');
+
+            // Render Video Grid
+            const videoGrid = document.getElementById('painPointsVideoGrid');
+            videoGrid.innerHTML = painPointVideos.map(video => `
+                <div class="video-card">
+                    <div class="video-preview">
+                        <div class="play-button">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <h3 class="video-title">${video.title}</h3>
+                    <div class="tag-container">
+                        ${video.tags.map(tag => `<span class="tag">#${tag}</span>`).join('')}
+                    </div>
+                    <div class="video-stats">
+                        <div class="stat-group">
+                            <span class="stat-item"><i class="fas fa-eye"></i> ${video.views}</span>
+                            <span class="stat-item"><i class="fas fa-heart"></i> ${video.likes}</span>
+                        </div>
+                        <i class="fas fa-download"></i>
+                    </div>
+                    <div class="video-meta">
+                        <span>${video.author}</span>
+                        <span>${video.date}</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Initialize Trending Creators
+        function initTrendingCreators() {
+            // Render Creators List
+            const creatorsList = document.getElementById('creatorsList');
+            creatorsList.innerHTML = creators.map(creator => `
+                <tr>
+                    <td>
+                        <div class="creator-info">
+                            <i class="fas fa-chevron-right text-gray-400"></i>
+                            <div class="creator-avatar"></div>
+                            <span class="creator-username">@${creator.username}</span>
+                        </div>
+                    </td>
+                    <td class="text-center">${creator.videoCount}</td>
+                    <td class="text-center">${creator.views}</td>
+                    <td class="text-center">${creator.interactions}</td>
+                </tr>
+            `).join('');
+
+            // Render Video Grid
+            const videoGrid = document.getElementById('trendingVideoGrid');
+            videoGrid.innerHTML = trendingVideos.map(video => `
+                <div class="video-card">
+                    <div class="video-preview">
+                        <div class="play-button">
+                            <i class="fas fa-play"></i>
+                        </div>
+                        <div class="video-stats">
+                            <span><i class="fas fa-eye"></i> ${video.views}</span>
+                            <span><i class="fas fa-heart"></i> ${video.likes}</span>
+                        </div>
+                    </div>
+                    <h3 class="video-title">${video.title}</h3>
+                    <div class="video-meta">
+                        <span>${video.author}</span>
+                        <span>${video.date}</span>
+                    </div>
+                    <div class="video-actions">
+                        <span><i class="fas fa-share"></i> ${video.shares}</span>
+                        <i class="fas fa-download"></i>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            initVideoFormats();
+            initPainPoints();
+            initTrendingCreators();
+            // 初始化图表
+            const performanceChart = echarts.init(document.getElementById('performanceChart'));
+            const performanceOption = {
+                tooltip: {
+                    trigger: 'axis'
+                },
+                legend: {
+                    data: ['Views', 'Engagement'],
+                    bottom: 0
+                },
+                grid: {
+                    left: '3%',
+                    right: '4%',
+                    bottom: '10%',
+                    containLabel: true
+                },
+                xAxis: {
+                    type: 'category',
+                    data: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun']
+                },
+                yAxis: {
+                    type: 'value'
+                },
+                series: [
+                    {
+                        name: 'Views',
+                        type: 'line',
+                        areaStyle: {
+                            opacity: 0.2
+                        },
+                        data: [2400, 1398, 9800, 3908, 4800, 3800],
+                        itemStyle: {
+                            color: '#FF6B34'
+                        }
+                    },
+                    {
+                        name: 'Engagement',
+                        type: 'line',
+                        areaStyle: {
+                            opacity: 0.2
+                        },
+                        data: [1400, 2210, 2290, 2000, 2181, 2500],
+                        itemStyle: {
+                            color: '#82AAFF'
+                        }
+                    }
+                ]
+            };
+            performanceChart.setOption(performanceOption);
+
+            // Distribution Chart
+            const distributionChart = echarts.init(document.getElementById('distributionChart'));
+            const distributionOption = {
+                tooltip: {
+                    trigger: 'item'
+                },
+                legend: {
+                    bottom: 0
+                },
+                series: [
+                    {
+                        type: 'pie',
+                        radius: ['40%', '70%'],
+                        data: [
+                            { value: 35, name: 'Video Tutorials' },
+                            { value: 25, name: 'Product Reviews' },
+                            { value: 20, name: 'User Stories' },
+                            { value: 20, name: 'Tips & Tricks' }
+                        ],
+                        itemStyle: {
+                            borderRadius: 10,
+                            borderColor: '#fff',
+                            borderWidth: 2
+                        },
+                        label: {
+                            show: true,
+                            formatter: '{b}: {d}%'
+                        }
+                    }
+                ]
+            };
+            distributionChart.setOption(distributionOption);
+
+            // 响应式处理
+            window.addEventListener('resize', function() {
+                performanceChart.resize();
+                distributionChart.resize();
+            });
+        });
+    </script>
+</body>
+</html>
